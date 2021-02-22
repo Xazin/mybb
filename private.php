@@ -1503,6 +1503,8 @@ if($mybb->input['action'] == "delete_folder" && $mybb->request_method == "post")
 
 	if(!empty($fid))
 	{
+        $plugins->run_hooks("private_delete_folder_start");
+        
 		$folders = explode('$%%$', $mybb->user['pmfolders']);
 		$newfolders = '';
 		foreach ($folders as $key => $value)
