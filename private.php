@@ -929,6 +929,7 @@ if($mybb->input['action'] == "send")
 		'codebuttons' => $codebuttons,
 		'postbit' => $postbit,
 		'posticons' => $posticons,
+        'folders' => $folders,
 	]));
 }
 
@@ -1274,6 +1275,7 @@ if($mybb->input['action'] == "tracking")
 		'unread_multipage' => $unread_multipage,
 		'readmessages' => $readmessages,
 		'unreadmessages' => $unreadmessages,
+        'folders' => $folders,
 	]));
 }
 
@@ -1365,6 +1367,9 @@ if($mybb->input['action'] == "folders")
 {
 	$plugins->run_hooks("private_folders_start");
 
+    // Conflicting variables - this allows for folders in navigation
+	$_folders = $folders;
+    
 	$folderlist = [];
 	$foldersexploded = explode("$%%$", $mybb->user['pmfolders']);
 	foreach($foldersexploded as $key => $folders)
@@ -1388,6 +1393,7 @@ if($mybb->input['action'] == "folders")
 
 	output_page(\MyBB\template('private/folders.twig', [
 		'folderlist' => $folderlist,
+        'folders' => $_folders,
 	]));
 }
 
